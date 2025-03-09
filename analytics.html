@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karcha Book - Analytics</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>Karcha Book</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="expense.html">Expense Tracker</a></li>
+            <li><a href="analytics.html" class="active">Analytics</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- Analytics Section -->
+    <section class="analytics">
+        <div class="container">
+            <h2>Expense Analytics</h2>
+            
+            <div class="analytics-filters">
+                <div class="filter-group">
+                    <label for="time-period">Time Period:</label>
+                    <select id="time-period">
+                        <option value="all">All Time</option>
+                        <option value="month">This Month</option>
+                        <option value="quarter">Last 3 Months</option>
+                        <option value="year">This Year</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="analytics-summary">
+                <div class="summary-card">
+                    <h3>Total Expenses</h3>
+                    <p id="analytics-total">₹0.00</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Average Per Day</h3>
+                    <p id="analytics-average-daily">₹0.00</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Highest Category</h3>
+                    <p id="analytics-highest-category">N/A</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Highest Expense</h3>
+                    <p id="analytics-highest-expense">₹0.00</p>
+                </div>
+            </div>
+            
+            <div class="charts-container">
+                <div class="chart-wrapper">
+                    <h3>Expenses by Category</h3>
+                    <div class="chart-container">
+                        <canvas id="category-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-wrapper">
+                    <h3>Monthly Expenses</h3>
+                    <div class="chart-container">
+                        <canvas id="monthly-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-wrapper">
+                    <h3>Expense Trends</h3>
+                    <div class="chart-container">
+                        <canvas id="trend-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-wrapper">
+                    <h3>Daily Expenses</h3>
+                    <div class="chart-container">
+                        <canvas id="daily-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="no-data-message" class="no-data-message">
+                <p>No expense data available for analysis. Please add some expenses first.</p>
+                <a href="expense.html" class="btn">Add Expenses</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Karcha Book by Pooja Gurjar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/analytics.js"></script>
+</body>
+</html> 

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karcha Book - Manage Expenses</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>Karcha Book</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="expense.html" class="active">Expense Tracker</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- Expense Tracker Section -->
+    <section class="expense-tracker">
+        <div class="container">
+            <h2>Manage Your Expenses</h2>
+            
+            <!-- Expense Form -->
+            <div class="expense-form-container">
+                <h3>Add New Expense</h3>
+                <form id="expense-form">
+                    <div class="form-group">
+                        <label for="expense-amount">Amount (₹)</label>
+                        <input type="number" id="expense-amount" step="0.01" min="0.01" required>
+                        <div class="error-message" id="amount-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expense-description">Description</label>
+                        <input type="text" id="expense-description" required>
+                        <div class="error-message" id="description-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expense-date">Date</label>
+                        <input type="date" id="expense-date" required>
+                        <div class="error-message" id="date-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expense-category">Category</label>
+                        <select id="expense-category" required>
+                            <option value="">Select a category</option>
+                            <option value="Food">Food</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Education">Education</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="error-message" id="category-error"></div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" id="save-expense" class="btn">Add Expense</button>
+                        <button type="button" id="update-expense" class="btn btn-update" style="display: none;">Update Expense</button>
+                        <button type="button" id="cancel-update" class="btn btn-cancel" style="display: none;">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Expense List -->
+            <div class="expense-list-container">
+                <div class="expense-list-header">
+                    <h3>Your Expenses</h3>
+                    <div class="expense-filters">
+                        <div class="filter-group">
+                            <label for="filter-category">Filter by Category:</label>
+                            <select id="filter-category">
+                                <option value="All">All Categories</option>
+                                <option value="Food">Food</option>
+                                <option value="Transportation">Transportation</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Utilities">Utilities</option>
+                                <option value="Housing">Housing</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Education">Education</option>
+                                <option value="Travel">Travel</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="sort-by">Sort by:</label>
+                            <select id="sort-by">
+                                <option value="date-desc">Date (Newest First)</option>
+                                <option value="date-asc">Date (Oldest First)</option>
+                                <option value="amount-desc">Amount (Highest First)</option>
+                                <option value="amount-asc">Amount (Lowest First)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="expense-summary">
+                    <div class="summary-item">
+                        <h4>Total Expenses</h4>
+                        <p id="total-amount">₹0.00</p>
+                    </div>
+                    <div class="summary-item">
+                        <h4>Number of Expenses</h4>
+                        <p id="expense-count">0</p>
+                    </div>
+                </div>
+                
+                <div class="expense-table-container">
+                    <table class="expense-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expense-list">
+                            <!-- Expense items will be added here dynamically -->
+                        </tbody>
+                    </table>
+                    <div id="no-expenses-message" class="no-data-message">No expenses found. Add your first expense using the form above.</div>
+                </div>
+                
+                <div class="expense-actions">
+                    <button id="reset-expenses" class="btn btn-danger">Reset All Data</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Confirm Action</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="modal-message">Are you sure you want to proceed?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-cancel" class="btn btn-cancel">Cancel</button>
+                <button id="modal-confirm" class="btn btn-danger">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast-notification">
+        <div class="toast-content">
+            <i id="toast-icon" class="fas fa-check-circle"></i>
+            <div class="toast-message" id="toast-message">Operation successful!</div>
+        </div>
+        <div class="toast-progress"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Karcha Book by Pooja Gurjar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/expense.js"></script>
+</body>
+</html> 
