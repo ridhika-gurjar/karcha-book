@@ -1,4 +1,4 @@
-# Karcha Book
+# Kharcha Book
 
 A simple and user-friendly expense tracking app built with HTML, CSS, and JavaScript. Track your daily expenses in Indian Rupees (₹).
 
