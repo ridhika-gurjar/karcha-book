@@ -13,7 +13,7 @@ const amountInput = document.getElementById('expense-amount');
 const descriptionInput = document.getElementById('expense-description');
 const dateInput = document.getElementById('expense-date');
 const categoryInput = document.getElementById('expense-category');
-const expenseList = document.getElementById('expense-list');
+const expenseCardsContainer = document.getElementById('expense-cards-container');
 const noExpensesMessage = document.getElementById('no-expenses-message');
 const totalAmountElement = document.getElementById('total-amount');
 const expenseCountElement = document.getElementById('expense-count');
@@ -413,37 +413,40 @@ function renderExpenses() {
     const filteredExpenses = filterExpenses();
     const sortedExpenses = sortExpenses(filteredExpenses);
     
-    // Clear expense list
-    expenseList.innerHTML = '';
+    // Clear expense cards container
+    expenseCardsContainer.innerHTML = '';
     
     // Check if there are any expenses
     if (sortedExpenses.length === 0) {
         noExpensesMessage.style.display = 'block';
-        expenseList.style.display = 'none';
+        expenseCardsContainer.style.display = 'none';
     } else {
         noExpensesMessage.style.display = 'none';
-        expenseList.style.display = 'table-row-group';
+        expenseCardsContainer.style.display = 'grid';
         
-        // Render each expense
+        // Render each expense as a card
         sortedExpenses.forEach(expense => {
-            const row = document.createElement('tr');
+            const card = document.createElement('div');
+            card.className = `expense-card ${expense.category}`;
             
-            row.innerHTML = `
-                <td>${formatDate(expense.date)}</td>
-                <td>${expense.description}</td>
-                <td><span class="category-badge ${expense.category.toLowerCase()}">${expense.category}</span></td>
-                <td>${formatCurrency(expense.amount)}</td>
-                <td>
-                    <button class="action-btn edit" title="Edit" onclick="editExpense('${expense.id}')">
-                        <i class="fas fa-edit"></i>
+            card.innerHTML = `
+                <div class="expense-card-header">
+                    <span class="expense-card-date">${formatDate(expense.date)}</span>
+                    <span class="expense-card-amount">${formatCurrency(expense.amount)}</span>
+                </div>
+                <div class="expense-card-description">${expense.description}</div>
+                <span class="expense-card-category ${expense.category}">${expense.category}</span>
+                <div class="expense-card-actions">
+                    <button class="expense-card-btn edit" onclick="editExpense('${expense.id}')">
+                        <i class="fas fa-edit"></i> Edit
                     </button>
-                    <button class="action-btn delete" title="Delete" onclick="deleteExpense('${expense.id}')">
-                        <i class="fas fa-trash-alt"></i>
+                    <button class="expense-card-btn delete" onclick="deleteExpense('${expense.id}')">
+                        <i class="fas fa-trash-alt"></i> Delete
                     </button>
-                </td>
+                </div>
             `;
             
-            expenseList.appendChild(row);
+            expenseCardsContainer.appendChild(card);
         });
     }
     
