@@ -702,6 +702,59 @@ footer {
     .charts-container {
         grid-template-columns: 1fr;
     }
+    
+    /* Mobile form improvements */
+    input, select, button {
+        font-size: 16px !important; /* Prevents iOS zoom on focus */
+    }
+    
+    .form-group input,
+    .form-group select {
+        -webkit-appearance: none; /* Fixes iOS rounded corners */
+        border-radius: 4px;
+        padding: 12px; /* Larger touch targets */
+    }
+    
+    .btn {
+        padding: 12px 20px; /* Larger touch targets for buttons */
+        min-height: 44px; /* Apple's recommended minimum touch target size */
+    }
+    
+    /* Improve card layout on mobile */
+    #expense-cards-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .expense-card {
+        margin-bottom: 1rem;
+    }
+    
+    .expense-card-btn {
+        padding: 10px 15px; /* Larger touch targets */
+        min-height: 44px;
+    }
+    
+    /* Position filter labels above input fields in mobile view */
+    .filter-group {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        margin-bottom: 0.75rem;
+    }
+    
+    .filter-group label {
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+    
+    .filter-group select {
+        width: 100%;
+    }
+    
+    .expense-filters {
+        flex-direction: column;
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 576px) {
@@ -714,18 +767,6 @@ footer {
     }
     
     .form-actions button {
-        width: 100%;
-    }
-    
-    .expense-filters {
-        flex-direction: column;
-    }
-    
-    .filter-group {
-        width: 100%;
-    }
-    
-    .filter-group select {
         width: 100%;
     }
     

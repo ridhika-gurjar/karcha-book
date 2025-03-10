@@ -56,8 +56,18 @@ function init() {
     // Display expenses
     renderExpenses();
     
-    // Add event listeners
+    // Add event listeners - using both click and touchend for better mobile support
     expenseForm.addEventListener('submit', handleFormSubmit);
+    
+    // Fix for mobile devices - ensure the form submit button works on touch
+    saveExpenseBtn.addEventListener('click', function(e) {
+        // Prevent default only if it's not already being handled by the form submit
+        if (e.target === saveExpenseBtn) {
+            e.preventDefault();
+            handleFormSubmit(e);
+        }
+    });
+    
     updateExpenseBtn.addEventListener('click', handleUpdateExpense);
     cancelUpdateBtn.addEventListener('click', cancelUpdate);
     filterCategory.addEventListener('change', renderExpenses);
@@ -166,7 +176,10 @@ function validateForm() {
 
 // Handle form submission
 function handleFormSubmit(e) {
-    e.preventDefault();
+    // Always prevent default behavior
+    if (e) {
+        e.preventDefault();
+    }
     
     if (!validateForm()) {
         return;
@@ -199,6 +212,9 @@ function handleFormSubmit(e) {
     
     // Show success toast
     showToast('Expense added successfully!', 'success');
+    
+    // Return false to ensure the form doesn't submit traditionally
+    return false;
 }
 
 // Handle expense update
@@ -437,16 +453,29 @@ function renderExpenses() {
                 <div class="expense-card-description">${expense.description}</div>
                 <span class="expense-card-category ${expense.category}">${expense.category}</span>
                 <div class="expense-card-actions">
-                    <button class="expense-card-btn edit" onclick="editExpense('${expense.id}')">
+                    <button class="expense-card-btn edit" data-id="${expense.id}">
                         <i class="fas fa-edit"></i> Edit
                     </button>
-                    <button class="expense-card-btn delete" onclick="deleteExpense('${expense.id}')">
+                    <button class="expense-card-btn delete" data-id="${expense.id}">
                         <i class="fas fa-trash-alt"></i> Delete
                     </button>
                 </div>
             `;
             
             expenseCardsContainer.appendChild(card);
+            
+            // Add event listeners after the card is added to the DOM
+            const editBtn = card.querySelector('.expense-card-btn.edit');
+            const deleteBtn = card.querySelector('.expense-card-btn.delete');
+            
+            // Add both click and touch events for better mobile support
+            editBtn.addEventListener('click', function() {
+                editExpense(expense.id);
+            });
+            
+            deleteBtn.addEventListener('click', function() {
+                deleteExpense(expense.id);
+            });
         });
     }
     
