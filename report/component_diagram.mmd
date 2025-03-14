@@ -1,0 +1,48 @@
+flowchart TD
+    subgraph "script.js"
+        Common[Common Functions]
+        Nav[Navigation]
+        Toast[Toast Notifications]
+    end
+
+    subgraph "expense.js"
+        ExpenseForm[Expense Form Handler]
+        Validation[Form Validation]
+        CRUD[CRUD Operations]
+        FilterSort[Filter & Sort]
+        Modal[Modal Handler]
+    end
+
+    subgraph "analytics.js"
+        TimeFilter[Time Period Filter]
+        Summary[Analytics Summary]
+        Charts[Chart Generation]
+        DataProcess[Data Processing]
+    end
+
+    subgraph "Data Storage"
+        LocalStorage[(localStorage)]
+    end
+
+    Common --> Nav
+    Common --> Toast
+    
+    ExpenseForm --> Validation
+    Validation --> CRUD
+    CRUD --> LocalStorage
+    FilterSort --> CRUD
+    
+    TimeFilter --> DataProcess
+    DataProcess --> Summary
+    DataProcess --> Charts
+    Charts --> LocalStorage
+    
+    classDef scriptClass fill:#4a6fa5,color:white
+    classDef expenseClass fill:#28a745,color:white
+    classDef analyticsClass fill:#ff9800,color:white
+    classDef storageClass fill:#6c757d,color:white
+    
+    class Common,Nav,Toast scriptClass
+    class ExpenseForm,Validation,CRUD,FilterSort,Modal expenseClass
+    class TimeFilter,Summary,Charts,DataProcess analyticsClass
+    class LocalStorage storageClass 

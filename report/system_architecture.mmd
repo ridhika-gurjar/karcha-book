@@ -1,0 +1,45 @@
+flowchart TD
+    subgraph "Frontend"
+        HTML[HTML Files]
+        CSS[CSS Styles]
+        JS[JavaScript Files]
+    end
+
+    subgraph "JavaScript Modules"
+        ScriptJS[script.js\nCommon Functions]
+        ExpenseJS[expense.js\nExpense Management]
+        AnalyticsJS[analytics.js\nAnalytics & Charts]
+    end
+
+    subgraph "Data Management"
+        LocalStorage[(localStorage)]
+        DataModel[Expense Data Model]
+    end
+
+    subgraph "External Libraries"
+        ChartJS[Chart.js]
+        FontAwesome[Font Awesome Icons]
+    end
+
+    HTML --> JS
+    CSS --> HTML
+    JS --> ScriptJS
+    JS --> ExpenseJS
+    JS --> AnalyticsJS
+
+    ExpenseJS --> DataModel
+    AnalyticsJS --> DataModel
+    DataModel <--> LocalStorage
+
+    AnalyticsJS --> ChartJS
+    HTML --> FontAwesome
+
+    classDef frontendClass fill:#4a6fa5,color:white
+    classDef jsClass fill:#28a745,color:white
+    classDef dataClass fill:#ff9800,color:white
+    classDef externalClass fill:#6c757d,color:white
+
+    class HTML,CSS frontendClass
+    class ScriptJS,ExpenseJS,AnalyticsJS jsClass
+    class LocalStorage,DataModel dataClass
+    class ChartJS,FontAwesome externalClass 

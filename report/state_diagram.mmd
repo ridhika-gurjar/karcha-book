@@ -1,0 +1,25 @@
+stateDiagram-v2
+    [*] --> InitialLoad
+    
+    InitialLoad --> ViewingExpenses: Load Expenses
+    
+    ViewingExpenses --> AddingExpense: Click Add Button
+    ViewingExpenses --> EditingExpense: Click Edit Button
+    ViewingExpenses --> ViewingAnalytics: Click Analytics Tab
+    ViewingExpenses --> MobileNav: Click Burger Menu
+    
+    AddingExpense --> FormValidation: Submit Form
+    FormValidation --> ValidationError: Invalid Input
+    FormValidation --> SavingExpense: Valid Input
+    ValidationError --> AddingExpense: Correct Input
+    
+    SavingExpense --> ViewingExpenses: Save Success
+    
+    EditingExpense --> FormValidation: Submit Changes
+    EditingExpense --> ViewingExpenses: Cancel Edit
+    
+    ViewingAnalytics --> TimeFilter: Select Period
+    TimeFilter --> ViewingAnalytics: Update Charts
+    
+    MobileNav --> ViewingExpenses: Close Menu
+    MobileNav --> ViewingAnalytics: Select Analytics 

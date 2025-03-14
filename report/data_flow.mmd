@@ -1,0 +1,37 @@
+flowchart TD
+    User((User)) --> |Input| Form[Expense Form]
+    
+    Form --> |Submit| Validation[Form Validation]
+    Validation --> |Valid| CreateExpense[Create Expense]
+    Validation --> |Invalid| ShowErrors[Show Error Messages]
+    ShowErrors --> Form
+    
+    CreateExpense --> |Save| LocalStorage[(localStorage)]
+    
+    Form --> |Edit| LoadExpense[Load Expense Data]
+    LoadExpense --> |Update| LocalStorage
+    
+    Form --> |Delete| ConfirmModal[Confirmation Modal]
+    ConfirmModal --> |Confirm| DeleteExpense[Delete Expense]
+    DeleteExpense --> |Remove| LocalStorage
+    
+    LocalStorage --> |Load| RenderExpenses[Render Expenses]
+    RenderExpenses --> |Display| Cards[Expense Cards]
+    
+    Cards --> |Filter| FilterExpenses[Filter Expenses]
+    FilterExpenses --> |Sort| SortExpenses[Sort Expenses]
+    SortExpenses --> |Update| Cards
+    
+    Cards --> |View Analytics| LoadAnalytics[Load Analytics]
+    LoadAnalytics --> |Process| GenerateCharts[Generate Charts]
+    GenerateCharts --> |Display| Charts[Chart.js Charts]
+    
+    classDef userClass fill:#4a6fa5,color:white
+    classDef processClass fill:#28a745,color:white
+    classDef storageClass fill:#ff9800,color:white
+    classDef displayClass fill:#6c757d,color:white
+    
+    class User userClass
+    class Form,Validation,CreateExpense,LoadExpense,DeleteExpense,FilterExpenses,SortExpenses,LoadAnalytics,GenerateCharts processClass
+    class LocalStorage storageClass
+    class Cards,Charts displayClass 
