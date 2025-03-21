@@ -1,24 +1,24 @@
 flowchart TD
     subgraph "Frontend"
-        HTML[HTML Files]
-        CSS[CSS Styles]
-        JS[JavaScript Files]
+        HTML["HTML Files"]
+        CSS["CSS Styles"]
+        JS["JavaScript Files"]
     end
 
     subgraph "JavaScript Modules"
-        ScriptJS[script.js\nCommon Functions]
-        ExpenseJS[expense.js\nExpense Management]
-        AnalyticsJS[analytics.js\nAnalytics & Charts]
+        ScriptJS["script.js\nCommon Functions"]
+        ExpenseJS["expense.js\nExpense Management"]
+        AnalyticsJS["analytics.js\nAnalytics & Charts"]
     end
 
     subgraph "Data Management"
-        LocalStorage[(localStorage)]
-        DataModel[Expense Data Model]
+        LocalStorage[("localStorage")]
+        DataModel["Expense Data Model"]
     end
 
     subgraph "External Libraries"
-        ChartJS[Chart.js]
-        FontAwesome[Font Awesome Icons]
+        ChartJS["Chart.js"]
+        FontAwesome["Font Awesome Icons"]
     end
 
     HTML --> JS

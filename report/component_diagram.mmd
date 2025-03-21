@@ -1,27 +1,27 @@
 flowchart TD
     subgraph "script.js"
-        Common[Common Functions]
-        Nav[Navigation]
-        Toast[Toast Notifications]
+        Common["Common Functions"]
+        Nav["Navigation"]
+        Toast["Toast Notifications"]
     end
 
     subgraph "expense.js"
-        ExpenseForm[Expense Form Handler]
-        Validation[Form Validation]
-        CRUD[CRUD Operations]
-        FilterSort[Filter & Sort]
-        Modal[Modal Handler]
+        ExpenseForm["Expense Form Handler"]
+        Validation["Form Validation"]
+        CRUD["CRUD Operations"]
+        FilterSort["Filter & Sort"]
+        Modal["Modal Handler"]
     end
 
     subgraph "analytics.js"
-        TimeFilter[Time Period Filter]
-        Summary[Analytics Summary]
-        Charts[Chart Generation]
-        DataProcess[Data Processing]
+        TimeFilter["Time Period Filter"]
+        Summary["Analytics Summary"]
+        Charts["Chart Generation"]
+        DataProcess["Data Processing"]
     end
 
     subgraph "Data Storage"
-        LocalStorage[(localStorage)]
+        LocalStorage[("localStorage")]
     end
 
     Common --> Nav

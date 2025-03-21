@@ -1,38 +1,38 @@
 flowchart TD
-    Start([Start]) --> LoadApp[Load Application]
+    Start(["Start"]) --> LoadApp["Load Application"]
     
-    LoadApp --> CheckData{Has Data?}
-    CheckData -->|Yes| ShowExpenses[Show Expense Cards]
-    CheckData -->|No| ShowEmpty[Show Empty Message]
+    LoadApp --> CheckData{"Has Data?"}
+    CheckData -->|"Yes"| ShowExpenses["Show Expense Cards"]
+    CheckData -->|"No"| ShowEmpty["Show Empty Message"]
     
-    ShowExpenses --> UserAction{User Action}
+    ShowExpenses --> UserAction{"User Action"}
     
-    UserAction -->|Add| AddExpense[Add New Expense]
-    AddExpense --> ValidateForm{Valid Form?}
-    ValidateForm -->|No| ShowErrors[Show Error Messages]
-    ValidateForm -->|Yes| SaveExpense[Save Expense]
+    UserAction -->|"Add"| AddExpense["Add New Expense"]
+    AddExpense --> ValidateForm{"Valid Form?"}
+    ValidateForm -->|"No"| ShowErrors["Show Error Messages"]
+    ValidateForm -->|"Yes"| SaveExpense["Save Expense"]
     ShowErrors --> AddExpense
-    SaveExpense --> ShowToast[Show Success Toast]
+    SaveExpense --> ShowToast["Show Success Toast"]
     ShowToast --> ShowExpenses
     
-    UserAction -->|Edit| EditExpense[Edit Expense]
+    UserAction -->|"Edit"| EditExpense["Edit Expense"]
     EditExpense --> ValidateForm
     EditExpense --> ShowExpenses
     
-    UserAction -->|Delete| ConfirmDelete[Show Delete Modal]
-    ConfirmDelete -->|Confirm| DeleteExpense[Delete Expense]
-    ConfirmDelete -->|Cancel| ShowExpenses
+    UserAction -->|"Delete"| ConfirmDelete["Show Delete Modal"]
+    ConfirmDelete -->|"Confirm"| DeleteExpense["Delete Expense"]
+    ConfirmDelete -->|"Cancel"| ShowExpenses
     DeleteExpense --> ShowToast
     
-    UserAction -->|Filter| ApplyFilter[Apply Category Filter]
+    UserAction -->|"Filter"| ApplyFilter["Apply Category Filter"]
     ApplyFilter --> ShowExpenses
     
-    UserAction -->|Sort| ApplySort[Apply Sort Order]
+    UserAction -->|"Sort"| ApplySort["Apply Sort Order"]
     ApplySort --> ShowExpenses
     
-    UserAction -->|Analytics| ViewAnalytics[View Analytics]
-    ViewAnalytics --> SelectPeriod[Select Time Period]
-    SelectPeriod --> UpdateCharts[Update Charts]
+    UserAction -->|"Analytics"| ViewAnalytics["View Analytics"]
+    ViewAnalytics --> SelectPeriod["Select Time Period"]
+    SelectPeriod --> UpdateCharts["Update Charts"]
     UpdateCharts --> ViewAnalytics
     
     classDef startClass fill:#4a6fa5,color:white
